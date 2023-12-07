@@ -119,10 +119,16 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  int _selectedPageIndex = 0;
+  late int _selectedPageIndex;
   late PageController _pageController = PageController(initialPage: _selectedPageIndex);
 
   void changePage (int selectedPageIndex) {
+
+    if (selectedPageIndex == 2) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => ConverterPage()));
+      return;
+    }
+
     setState(() {
       _selectedPageIndex = selectedPageIndex;
       _pageController.jumpToPage(selectedPageIndex);
@@ -133,6 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
 
+    _selectedPageIndex = 0;
     _pageController = PageController(initialPage: _selectedPageIndex);
   }
 
@@ -169,7 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: const <Widget>[
             StarredPage(),
             CurrenciesPage(),
-            ConverterPage(),
+            Placeholder(),
             NewsPage(),
           ]
         ),
