@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../pages/currency_details.dart';
 import '../extensions/custom_theme_extension.dart';
 import "../constants/colors.dart" as colors;
 
@@ -14,7 +15,9 @@ class _ListItemState extends State<ListItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => CurrencyDetailsPage()));
+      },
       child: Container(
         height: 50,
         padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
