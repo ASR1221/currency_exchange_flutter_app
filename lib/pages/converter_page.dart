@@ -1,6 +1,7 @@
-import 'package:final_project/widgets/background_gradient_wrapper.dart';
-import 'package:final_project/widgets/small_top_bar.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/background_gradient_wrapper.dart';
+import '../widgets/small_top_bar.dart';
 
 class ConverterPage extends StatefulWidget {
   const ConverterPage({super.key});
