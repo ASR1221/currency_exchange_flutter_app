@@ -18,7 +18,8 @@ void main() async {
 }
 
 // TODO: navigate to converter page using navigator
-// TODO: prevent side scrolling
+// TODO: prevent side scrolling ***
 // TODO: converter page
 // TODO: new details page
 // TODO: currency details page
+// TODO: about app page
