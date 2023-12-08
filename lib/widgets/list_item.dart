@@ -19,7 +19,7 @@ class _ListItemState extends State<ListItem> {
         Navigator.push(context, MaterialPageRoute(builder: (context) => CurrencyDetailsPage()));
       },
       child: Container(
-        height: 50,
+        height: 52,
         padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
         margin: const EdgeInsets.only(bottom: 15),
         decoration: BoxDecoration(
@@ -31,7 +31,7 @@ class _ListItemState extends State<ListItem> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              width: 80,
+              width: 90,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -43,17 +43,17 @@ class _ListItemState extends State<ListItem> {
                       borderRadius: BorderRadius.circular(7),
                     ),
                   ),
-                  Text("USD"),
+                  Text("USD", style: TextStyle(fontSize: 18),),
                 ],
               ),
             ),
             SizedBox(
-              width: 120,
+              width: 150,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("10.300"),
-                  Text("+9.15%"),
+                  Text("10.300", style: TextStyle(fontSize: 18),),
+                  Text("+9.15%", style: TextStyle(fontSize: 18),),
                 ],
               ),
             ),
