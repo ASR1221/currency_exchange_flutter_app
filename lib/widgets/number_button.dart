@@ -17,10 +17,11 @@ class DialNumberButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.transparent,
           border: Border.all(color: colors.gradientBorderColor, width: 1),
-          borderRadius: BorderRadius.circular(10)
+          borderRadius: BorderRadius.circular(11)
         ),
         child: Center(
-          child: Text(btnNumber),
+          child: btnNumber == "" ? Icon(Icons.backspace_rounded, color: colors.gradientBorderColor, size: 28,) :
+          Text(btnNumber, style: TextStyle(color: colors.gradientBorderColor, fontSize: 28),),
         ),
       ),
     );

@@ -17,6 +17,7 @@ void main() async {
   ));
 }
 
+// TODO: search bar in list page
 // TODO: converter page
 // TODO: new details page
 // TODO: currency details page
