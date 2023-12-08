@@ -18,4 +18,3 @@ void main() async {
 }
 
 // TODO: currency details page
-// TODO: about app page
