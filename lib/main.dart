@@ -17,6 +17,6 @@ void main() async {
   ));
 }
 
-// TODO: new details page
+// TODO: news details page
 // TODO: currency details page
 // TODO: about app page

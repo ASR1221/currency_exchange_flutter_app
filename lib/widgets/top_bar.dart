@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import "../constants/colors.dart" as colors;
 import "base_dropdown.dart";
 import "theme_selection.dart";
+import "../pages/about_page.dart";
 
 class TopBar extends StatefulWidget {
   const TopBar({
@@ -88,7 +89,9 @@ class _TopBarState extends State<TopBar> {
             ],),
             const SizedBox(height: 20,),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AboutPage()));
+              },
               child: Container(
                 alignment: Alignment.centerLeft,
                 child: Row(
