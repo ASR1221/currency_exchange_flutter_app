@@ -20,7 +20,7 @@ class _CurrenciesPageState extends State<CurrenciesPage> {
   Widget build(BuildContext context) {
     return BackGroundGradientWrapper(
       childApp: Padding(
-        padding: const EdgeInsets.only(top: 100, left: 10, right: 10, bottom: 55),
+        padding: const EdgeInsets.only(top: 100, left: 10, right: 10, bottom: 35),
         child: MediaQuery.removePadding(
           context: context,
           removeTop: true,
