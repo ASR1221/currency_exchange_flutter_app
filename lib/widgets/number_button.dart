@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import "../constants/colors.dart" as colors;
 
 class DialNumberButton extends StatelessWidget {
-  const DialNumberButton({super.key, required this.btnNumber});
+  const DialNumberButton({super.key, required this.btnNumber, required this.onTapHandler});
 
   final String btnNumber;
+  final void Function() onTapHandler;
   
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTapHandler,
       child: Container(
         width: 80,
         height: 80,

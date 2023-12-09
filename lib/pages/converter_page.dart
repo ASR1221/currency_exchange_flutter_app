@@ -2,9 +2,9 @@ import 'package:final_project/widgets/base_dropdown.dart';
 import 'package:final_project/widgets/number_button.dart';
 import 'package:flutter/material.dart';
 
+import '../constants/colors.dart' as colors;
 import '../widgets/background_gradient_wrapper.dart';
 import '../widgets/small_top_bar.dart';
-import '../constants/colors.dart' as colors;
 
 class ConverterPage extends StatefulWidget {
   const ConverterPage({super.key});
@@ -13,10 +13,34 @@ class ConverterPage extends StatefulWidget {
   State<ConverterPage> createState() => _ConverterPageState();
 }
 
-class _ConverterPageState extends State<ConverterPage> with AutomaticKeepAliveClientMixin<ConverterPage> {
+class _ConverterPageState extends State<ConverterPage> {
 
-  @override
-  bool get wantKeepAlive => true;
+  String fromNumber = "0";
+  String toNumber = "0";
+
+  String fromBase = "";
+  String toBase = "";
+
+  void handleNumberTap(String num) {
+    setState(() {
+      if (fromNumber == "0" && num == "0") {
+        return;
+      } else if (fromNumber.startsWith("0") && num != "0") {
+        fromNumber = fromNumber.replaceFirst("0", "");
+      }
+      fromNumber = fromNumber + num;
+    });
+  }
+
+  void handleDeleteTap() {
+    setState(() {
+      if (fromNumber.length == 1) {
+        fromNumber = "0";
+      } else {
+        fromNumber = fromNumber.substring(0, fromNumber.length - 1);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +49,6 @@ class _ConverterPageState extends State<ConverterPage> with AutomaticKeepAliveCl
       Navigator.pop(context);
     }
 
-    super.build(context);
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -65,51 +88,51 @@ class _ConverterPageState extends State<ConverterPage> with AutomaticKeepAliveCl
                   gradient: colors.topNavGradient,
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(17), topRight: Radius.circular(17),),
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 20, right: 20, top: 22, bottom: 25),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 22, bottom: 25),
                   child: Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text("100", style: TextStyle(fontSize: 25, color: colors.gradientBorderColor),),
-                        Icon(Icons.arrow_right_alt_rounded, color: colors.gradientBorderColor, size: 40,),
-                        Text("160", style: TextStyle(fontSize: 25, color: colors.gradientBorderColor),),
+                        Text(fromNumber, style: const TextStyle(fontSize: 25, color: colors.gradientBorderColor),),
+                        const Icon(Icons.arrow_right_alt_rounded, color: colors.gradientBorderColor, size: 40,),
+                        Text(toNumber, style: const TextStyle(fontSize: 25, color: colors.gradientBorderColor),),
                       ],
                     ),
-                    Divider(
+                    const Divider(
                       height: 1,
                       color: colors.gradientBorderColor,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        DialNumberButton(btnNumber: "1"),
-                        DialNumberButton(btnNumber: "2"),
-                        DialNumberButton(btnNumber: "3"),
+                        DialNumberButton(btnNumber: "1", onTapHandler: () {handleNumberTap("1");}),
+                        DialNumberButton(btnNumber: "2", onTapHandler: () {handleNumberTap("2");}),
+                        DialNumberButton(btnNumber: "3", onTapHandler: () {handleNumberTap("3");},),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        DialNumberButton(btnNumber: "4"),
-                        DialNumberButton(btnNumber: "5"),
-                        DialNumberButton(btnNumber: "6"),
+                        DialNumberButton(btnNumber: "4", onTapHandler: () {handleNumberTap("4");}),
+                        DialNumberButton(btnNumber: "5", onTapHandler: () {handleNumberTap("5");}),
+                        DialNumberButton(btnNumber: "6", onTapHandler: () {handleNumberTap("6");}),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        DialNumberButton(btnNumber: "7"),
-                        DialNumberButton(btnNumber: "8"),
-                        DialNumberButton(btnNumber: "9"),
+                        DialNumberButton(btnNumber: "7", onTapHandler: () {handleNumberTap("7");}),
+                        DialNumberButton(btnNumber: "8", onTapHandler: () {handleNumberTap("8");}),
+                        DialNumberButton(btnNumber: "9", onTapHandler: () {handleNumberTap("9");}),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        DialNumberButton(btnNumber: "."),
-                        DialNumberButton(btnNumber: "0"),
-                        DialNumberButton(btnNumber: ""), // TODO
+                        DialNumberButton(btnNumber: ".", onTapHandler: () {handleNumberTap(".");}),
+                        DialNumberButton(btnNumber: "0", onTapHandler: () {handleNumberTap("0");}),
+                        DialNumberButton(btnNumber: "", onTapHandler: handleDeleteTap),
                       ],
                     ),
                   ]),
