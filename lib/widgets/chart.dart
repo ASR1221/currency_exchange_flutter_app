@@ -24,8 +24,8 @@ class _CustomChartState extends State<CustomChart> {
       height: 260,
       child: LineChart(
         LineChartData(
-          gridData: FlGridData(show: false),
-          titlesData: FlTitlesData(
+          gridData: const FlGridData(show: false),
+          titlesData: const FlTitlesData(
             topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
             rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
             leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
@@ -41,7 +41,7 @@ class _CustomChartState extends State<CustomChart> {
               fitInsideVertically: true,
               getTooltipItems: (List<LineBarSpot> touchedSpots) {
                 return touchedSpots.map((LineBarSpot touchedSpot) {
-                  final textStyle = TextStyle(
+                  const textStyle = TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   );
