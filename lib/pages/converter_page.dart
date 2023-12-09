@@ -50,6 +50,7 @@ class _ConverterPageState extends State<ConverterPage> {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: PreferredSize(

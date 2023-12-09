@@ -21,6 +21,7 @@ class _CurrencyDetailsPageState extends State<CurrencyDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: PreferredSize(

@@ -16,5 +16,3 @@ void main() async {
     child: const MyApp(),
   ));
 }
-
-// TODO: currency details page
