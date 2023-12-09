@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../extensions/custom_theme_extension.dart';
-import "../constants/colors.dart" as colors;
 
 class BackGroundGradientWrapper extends StatelessWidget {
   const BackGroundGradientWrapper({super.key, required this.childApp});

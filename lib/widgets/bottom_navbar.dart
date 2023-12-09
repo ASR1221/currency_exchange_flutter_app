@@ -1,5 +1,3 @@
-import 'package:final_project/pages/currencies_page.dart';
-import 'package:final_project/pages/starred_page.dart';
 import 'package:flutter/material.dart';
 
 import "../constants/colors.dart" as colors;
