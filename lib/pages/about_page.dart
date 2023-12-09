@@ -28,24 +28,24 @@ class _AboutPageState extends State<AboutPage> {
       ),
       body: BackGroundGradientWrapper(
         childApp: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Center(
             child: ListView(
               children: [
-                SizedBox(height: 30,),
+                const SizedBox(height: 30,),
 
                 // Image.network(""),
-                Text("App LOGO", textAlign: TextAlign.center, style: TextStyle(fontSize: 24),),
+                const Text("App LOGO", textAlign: TextAlign.center, style: TextStyle(fontSize: 24),),
           
-                SizedBox(height: 100,),
+                const SizedBox(height: 100,),
           
-                Text("Created By: Abdullah Salah", textAlign: TextAlign.center, style: TextStyle(fontSize: 20),),
+                const Text("Created By: Abdullah Salah", textAlign: TextAlign.center, style: TextStyle(fontSize: 20),),
           
-                SizedBox(height: 25,),
+                const SizedBox(height: 25,),
           
-                Text("Contact Info", textAlign: TextAlign.center, style: TextStyle(fontSize: 18),),
+                const Text("Contact Info", textAlign: TextAlign.center, style: TextStyle(fontSize: 18),),
 
-                SizedBox(height: 15,),
+                const SizedBox(height: 15,),
           
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
