@@ -24,7 +24,7 @@ class CryptoModel {
       if (cryptoList.contains(asset['asset_id_quote'])) {
         currencies.add({
           'asset_id': asset['asset_id_quote'],
-          'rate': asset['rate'],
+          'rate': 1 / asset['rate'],
         });
       }
     }
