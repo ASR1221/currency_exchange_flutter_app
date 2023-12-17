@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
-import "../widgets/list_item.dart";
-import "../widgets/background_gradient_wrapper.dart";
 import '../constants/colors.dart' as colors;
+import '../models/crypto_model.dart';
+import "../widgets/background_gradient_wrapper.dart";
+import "../widgets/list_item.dart";
 
 class CurrenciesPage extends StatefulWidget {
-  const CurrenciesPage({super.key});
+  CurrenciesPage({super.key, required this.baseCurrency});
+
+  String baseCurrency;
 
   @override
   State<CurrenciesPage> createState() => _CurrenciesPageState();
@@ -13,61 +16,63 @@ class CurrenciesPage extends StatefulWidget {
 
 class _CurrenciesPageState extends State<CurrenciesPage> {
 
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   String searchText = "";
+
+  bool firstLoad = true;
+  bool isLoading = true;
+  late List<Map<String, dynamic>> currencies;
+
+  @override
+  void initState() {
+    super.initState();
+    
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      _asyncMethod();
+    });
+
+    firstLoad = false;
+  }
+
+  @override
+  void didUpdateWidget(CurrenciesPage oldWidget) {
+    if (!firstLoad) {
+      WidgetsBinding.instance.addPostFrameCallback((_){
+        _asyncMethod();
+      });
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  _asyncMethod() async {
+    CryptoModel cryptoModelObj = CryptoModel();
+    List<Map<String, dynamic>> x = await cryptoModelObj.getCurrenciesBased(baseFiat: widget.baseCurrency);
+
+    x.sort((a, b) => b['rate'].compareTo(a['rate']));
+    setState(() {
+      currencies = x;
+      isLoading = false;
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BackGroundGradientWrapper(
       childApp: Padding(
-        padding: const EdgeInsets.only(top: 100, left: 10, right: 10, bottom: 35),
+        padding: const EdgeInsets.only(top: 120, left: 10, right: 10, bottom: 35),
         child: MediaQuery.removePadding(
           context: context,
           removeTop: true,
-          child: ListView.builder(
-            itemCount: 15,
-            itemBuilder: (BuildContext context, int index) {
-              if (index == 0) {
-                return Column(
-                children: [
-                  const SizedBox(height: 30,),
-                  TextField(
-                    controller: _controller,
-                    cursorColor: Colors.cyan,
-                    // style: const TextStyle(color: colors.lightThemeTextColor),
-                    decoration: InputDecoration(
-                      hintText: 'Search',
-                      filled: true,
-                      fillColor: colors.darkThemeBorderColor.withOpacity(0.8),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 25, vertical: 2),
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      suffixIcon: searchText == "" ? null : IconButton(
-                        onPressed: () {
-                          setState(() {
-                            searchText = "";
-                          });
-                          _controller.text = "";
-                        },
-                        icon: const Icon(Icons.clear_rounded),
-                      ),
-                    ),
-                    onChanged: (value) {
-                      setState(() {
-                        searchText = value.trim();
-                      });
-                    }
-                  ),
-                  const SizedBox(height: 20,),
-                  const ListItem(),
-                ],
-              );
-              } else {
-                return const ListItem();
-              }
-            }
+          child: isLoading ? Center(child: Text("Loading"),) : ListView.builder(
+            itemCount: currencies.length,
+            itemBuilder: (BuildContext context, int index) =>
+              ListItem(assetId: currencies[index]['asset_id'], rate: currencies[index]['rate'],),
           ),
         ),
       ),
