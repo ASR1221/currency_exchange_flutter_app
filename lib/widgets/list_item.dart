@@ -5,7 +5,10 @@ import '../extensions/custom_theme_extension.dart';
 import "../constants/colors.dart" as colors;
 
 class ListItem extends StatefulWidget {
-  const ListItem({super.key});
+  ListItem({super.key, required this.assetId, required this.rate});
+
+  String assetId;
+  double rate;
 
   @override
   State<ListItem> createState() => _ListItemState();
@@ -21,7 +24,7 @@ class _ListItemState extends State<ListItem> {
       child: Container(
         height: 52,
         padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
-        margin: const EdgeInsets.only(bottom: 15),
+        margin: const EdgeInsets.symmetric(vertical: 8),
         decoration: BoxDecoration(
           color: Colors.transparent,
           borderRadius: BorderRadius.circular(10),
@@ -31,32 +34,21 @@ class _ListItemState extends State<ListItem> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              width: 90,
+              width: 100,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    width: 40,
+                    width: 25,
                     height: 25,
-                    decoration: BoxDecoration(
-                      gradient: colors.loadingPlaceholderGradient,
-                      borderRadius: BorderRadius.circular(7),
-                    ),
+                    color: Colors.transparent,
+                    child: Image.asset("images/crypto/${widget.assetId.toLowerCase()}.png"),
                   ),
-                  Text("USD", style: TextStyle(fontSize: 18),),
+                  const SizedBox(width: 20,),
+                  Text(widget.assetId, style: const TextStyle(fontSize: 18),),
                 ],
               ),
             ),
-            SizedBox(
-              width: 150,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("10.300", style: TextStyle(fontSize: 18),),
-                  Text("+9.15%", style: TextStyle(fontSize: 18),),
-                ],
-              ),
-            ),
+            Text(widget.rate.toStringAsFixed(6), style: const TextStyle(fontSize: 18),),
           ],
         ),
       ),
