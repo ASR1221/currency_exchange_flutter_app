@@ -2,47 +2,13 @@ import "dart:convert";
 
 import "package:http/http.dart" as http;
 
+import '../constants/currencies.dart';
+
 class CryptoModel {
 
   static const _baseURL = "https://rest.coinapi.io/v1/APIKEY-3264E81B-B4F9-45A3-A41E-92ADF08B9F3E";
 
-  static const List<String> _allCryptos = ['BTC', 'ETH', 'USDT', 'BNB', 'XRP', 'SOL', 'USDC', 'ADA', 'DOGE', 'AVAX', 'TRX', 'DOT', 'LINK', 'MATIC', 'TON'];
-  static const List<String> _allBases = ['USD', 'EUR', 'JPY', 'GBP', 'AUD', 'CAD', 'CHF', 'CNY', 'SEK', 'NZD'];
-
-  final List<Map<String, String>> _allCryptosIconsPair = [];
-  final List<Map<String, String>> _allBaseIconsPair = [];
-
-  List<Map<String, String>> get allCryptosIconsPair => _allCryptosIconsPair;
-  List<Map<String, String>> get allBaseIconsPair => _allBaseIconsPair;
-
-  void setIconPairs() async {
-
-    http.Response response = await http.get(Uri.parse("$_baseURL/icons/50"));
-
-    if (response.statusCode != 200) {
-      return;
-    }
-
-    List<Map<String, dynamic>> iconData = await jsonDecode(response.body);
-
-    for (var icon in iconData) {
-      if (_allCryptos.contains(icon['asset_id'])) {
-        _allCryptosIconsPair.add({
-          "asset_id": icon['asset_id'],
-          "icon_url": icon['url'],
-        });
-        break;
-      } else if (_allBases.contains(icon['asset_id'])) {
-        _allBaseIconsPair.add({
-          "asset_id": icon['asset_id'],
-          "icon_url": icon['url'],
-        });
-        break;
-      }
-    }
-  }
-
-  Future<dynamic> getCurrenciesBased({required String baseFiat, List<String> cryptoList = _allCryptos}) async {
+  Future<dynamic> getCurrenciesBased({required String baseFiat, List<String> cryptoList = allCryptos}) async {
 
     http.Response response = await http.get(Uri.parse("$_baseURL/exchangerate/$baseFiat"));
 
