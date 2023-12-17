@@ -19,7 +19,6 @@ class _CurrenciesPageState extends State<CurrenciesPage> {
   final TextEditingController _controller = TextEditingController();
   String searchText = "";
 
-  bool firstLoad = true;
   bool isLoading = true;
   late List<Map<String, dynamic>> currencies;
 
@@ -31,17 +30,6 @@ class _CurrenciesPageState extends State<CurrenciesPage> {
       _asyncMethod();
     });
 
-    firstLoad = false;
-  }
-
-  @override
-  void didUpdateWidget(CurrenciesPage oldWidget) {
-    if (!firstLoad) {
-      WidgetsBinding.instance.addPostFrameCallback((_){
-        _asyncMethod();
-      });
-    }
-    super.didUpdateWidget(oldWidget);
   }
 
   _asyncMethod() async {
