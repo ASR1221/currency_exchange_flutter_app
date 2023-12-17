@@ -20,14 +20,14 @@ class _BaseDropdownState extends State<BaseDropdown> {
 
   final TextEditingController textEditingController = TextEditingController();
 
-  Row menuItem(String item) {
+  Row menuItem(String item, bool isBase) {
     return Row(
       children: [
         Container(
           width: 25,
           height: 25,
           color: Colors.transparent,
-          child: Image.asset('images/base/${item.toLowerCase()}.png'),
+          child: Image.asset('images/${isBase ? "base" : "crypto"}/${item.toLowerCase()}.png'),
         ),
         const SizedBox(width: 10,),
         Text(
@@ -69,7 +69,7 @@ class _BaseDropdownState extends State<BaseDropdown> {
             items: currencyList
                 .map((item) => DropdownMenuItem(
                   value: item,
-                  child: menuItem(item),
+                  child: menuItem(item, widget.isMainBase && widget.selectedValue != "BTC"),
                 ))
                 .toList(),
             value: widget.isMainBase ? provider.baseCurrency : widget.selectedValue,
