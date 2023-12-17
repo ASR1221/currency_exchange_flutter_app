@@ -87,15 +87,16 @@ class MyApp extends StatelessWidget {
         theme: lightTheme(context),
         darkTheme: darkTheme(context),
         themeMode: themeMode(provider),
-        home: child,
+        home: MyHomePage(provider: provider,),
       ),
-      child: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  MyHomePage({super.key, required this.provider});
+
+  ProviderController provider;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -174,11 +175,11 @@ class _MyHomePageState extends State<MyHomePage> {
               _selectedPageIndex = selectedPageIndex;
             });
           },
-          children: const <Widget>[
+          children: <Widget>[
             StarredPage(),
-            CurrenciesPage(),
-            Placeholder(),
-            NewsPage(),
+            CurrenciesPage(baseCurrency: widget.provider.baseCurrency,),
+            const Placeholder(),
+            const NewsPage(),
           ]
         ),
       ),
