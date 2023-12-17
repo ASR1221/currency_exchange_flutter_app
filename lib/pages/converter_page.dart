@@ -18,8 +18,8 @@ class _ConverterPageState extends State<ConverterPage> {
   String fromNumber = "0";
   String toNumber = "0";
 
-  String fromBase = "";
-  String toBase = "";
+  String fromBase = "USD";
+  String toBase = "BTC";
 
   void handleNumberTap(String num) {
     setState(() {
@@ -64,21 +64,21 @@ class _ConverterPageState extends State<ConverterPage> {
           context: context,
           removeTop: true,
           child: Column(children: [
-            const Padding(
+            Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Row(children: [
-                Text("From: ", style: TextStyle(fontSize: 18),),
-                SizedBox(width: 20,),
-                BaseDropdown(),
+                const Text("From: ", style: TextStyle(fontSize: 18),),
+                const SizedBox(width: 20,),
+                BaseDropdown(isMainBase: false, selectedValue: fromBase,),
               ],),
             ),
             const SizedBox(height: 20,),
-            const Padding(
+            Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Row(children: [
-                Text("To: ", style: TextStyle(fontSize: 18),),
-                SizedBox(width: 45,),
-                BaseDropdown(),
+                const Text("To: ", style: TextStyle(fontSize: 18),),
+                const SizedBox(width: 45,),
+                BaseDropdown(isMainBase: false, selectedValue: toBase,),
               ],),
             ),
             const SizedBox(height: 40,),

@@ -77,7 +77,7 @@ class _TopBarState extends State<TopBar> {
               const SizedBox(width: 13,),
               const Text("Base Currency:", style: TextStyle(fontSize: 16, color: colors.lightThemeTextColor),),
               const SizedBox(width: 10,),
-              const BaseDropdown(),
+              BaseDropdown(isMainBase: true, selectedValue: "",),
             ],),
             const SizedBox(height: 20,),
             Row(children: [
