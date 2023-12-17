@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../constants/colors.dart' as colors;
 import '../widgets/background_gradient_wrapper.dart';
 import '../widgets/small_top_bar.dart';
+import '../models/crypto_model.dart';
 
 class ConverterPage extends StatefulWidget {
   const ConverterPage({super.key});
@@ -18,10 +19,13 @@ class _ConverterPageState extends State<ConverterPage> {
   String fromNumber = "0";
   String toNumber = "0";
 
-  String fromBase = "USD";
-  String toBase = "BTC";
+  String fromBase = "BTC";
+  String toBase = "USD";
 
-  void handleNumberTap(String num) {
+  CryptoModel cryptoModelObj = CryptoModel();
+
+  void handleNumberTap(String num) async {
+    print("hi1");
     setState(() {
       if (fromNumber == "0" && num == "0") {
         return;
@@ -30,16 +34,32 @@ class _ConverterPageState extends State<ConverterPage> {
       }
       fromNumber = fromNumber + num;
     });
+
+    dynamic result = await cryptoModelObj.convertCurrencies(from: fromBase, to: toBase, amount: double.parse(fromNumber));
+    if (result != null) {
+      setState(() {
+        toNumber = result.toStringAsFixed(6);
+      });
+    }
   }
 
-  void handleDeleteTap() {
+  void handleDeleteTap() async {
     setState(() {
       if (fromNumber.length == 1) {
         fromNumber = "0";
+        toNumber = "0";
+        return;
       } else {
         fromNumber = fromNumber.substring(0, fromNumber.length - 1);
       }
     });
+
+    dynamic result = await cryptoModelObj.convertCurrencies(from: fromBase, to: toBase, amount: double.parse(fromNumber));
+    if (result != null) {
+      setState(() {
+        toNumber = result.toStringAsFixed(6);
+      });
+    }
   }
 
   @override
@@ -95,9 +115,9 @@ class _ConverterPageState extends State<ConverterPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(fromNumber, style: const TextStyle(fontSize: 25, color: colors.gradientBorderColor),),
+                        Text(fromNumber, style: const TextStyle(fontSize: 22, color: colors.gradientBorderColor),),
                         const Icon(Icons.arrow_right_alt_rounded, color: colors.gradientBorderColor, size: 40,),
-                        Text(toNumber, style: const TextStyle(fontSize: 25, color: colors.gradientBorderColor),),
+                        Text(toNumber, style: const TextStyle(fontSize: 22, color: colors.gradientBorderColor),),
                       ],
                     ),
                     const Divider(

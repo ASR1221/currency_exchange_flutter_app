@@ -69,7 +69,7 @@ class _BaseDropdownState extends State<BaseDropdown> {
             items: currencyList
                 .map((item) => DropdownMenuItem(
                   value: item,
-                  child: menuItem(item, widget.isMainBase && widget.selectedValue != "BTC"),
+                  child: menuItem(item, !widget.isMainBase && widget.selectedValue != "BTC"),
                 ))
                 .toList(),
             value: widget.isMainBase ? provider.baseCurrency : widget.selectedValue,
