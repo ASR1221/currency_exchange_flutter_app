@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import "package:flutter/services.dart";
 import 'package:provider/provider.dart';
 
+import './pages/welcome_page.dart';
 import './pages/converter_page.dart';
 import "./pages/currencies_page.dart";
-import './pages/news_page.dart';
 import "./pages/starred_page.dart";
 import './widgets/background_gradient_wrapper.dart';
 import './widgets/small_top_bar.dart';
@@ -87,7 +87,7 @@ class MyApp extends StatelessWidget {
         theme: lightTheme(context),
         darkTheme: darkTheme(context),
         themeMode: themeMode(provider),
-        home: MyHomePage(provider: provider,),
+        home: provider.isFirstEnter ? WelcomePage(provider: provider) : MyHomePage(provider: provider,),
       ),
     );
   }
@@ -114,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
           _height = 90;
         });
       } else {
-        _height = 500;
+        _height = 390;
         _isOpen = true;
       }
     });
@@ -176,10 +176,9 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           },
           children: <Widget>[
-            StarredPage(),
+            StarredPage(baseCurrency: widget.provider.baseCurrency, starredCurrencies: widget.provider.starredCurrencies,),
             CurrenciesPage(baseCurrency: widget.provider.baseCurrency,),
             const Placeholder(),
-            const NewsPage(),
           ]
         ),
       ),

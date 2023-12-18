@@ -5,7 +5,11 @@ import "./chart.dart";
 import '../extensions/custom_theme_extension.dart';
 
 class FavCard extends StatefulWidget {
-  const FavCard({super.key});
+  FavCard({super.key, required this.currency, required this.data, required this.baseCurrency});
+
+  String baseCurrency;
+  String currency;
+  dynamic data;
 
   @override
   State<FavCard> createState() => _FavCardState();
@@ -28,31 +32,17 @@ class _FavCardState extends State<FavCard> {
         border: Border.all(color: customTheme?.borderColor ?? Colors.black),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("USD", style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),),
-                SizedBox(
-                  width: 140,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("10.300", style: TextStyle(fontSize: 18),),
-                      Text("+9.15%", style: TextStyle(fontSize: 18),),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(widget.currency, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w500),),
           ),
           const SizedBox(
             height: 10,
           ),
 
-          CustomChart(),
+          CustomChart(data: widget.data,),
 
           Divider(
             height: 7,
@@ -63,7 +53,8 @@ class _FavCardState extends State<FavCard> {
             width: double.infinity,
             child: GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => CurrencyDetailsPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => 
+                  CurrencyDetailsPage(assetId: widget.currency, baseCurrency: widget.baseCurrency,)));
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 18),

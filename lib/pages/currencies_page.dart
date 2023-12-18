@@ -35,12 +35,13 @@ class _CurrenciesPageState extends State<CurrenciesPage> {
   _asyncMethod() async {
     CryptoModel cryptoModelObj = CryptoModel();
     List<Map<String, dynamic>> x = await cryptoModelObj.getCurrenciesBased(baseFiat: widget.baseCurrency);
-
-    x.sort((a, b) => b['rate'].compareTo(a['rate']));
-    setState(() {
-      currencies = x;
-      isLoading = false;
-    });
+    if (x != null) {
+      x.sort((a, b) => b['rate'].compareTo(a['rate']));
+      setState(() {
+        currencies = x;
+        isLoading = false;
+      });
+    }
   }
 
   @override
@@ -57,10 +58,10 @@ class _CurrenciesPageState extends State<CurrenciesPage> {
         child: MediaQuery.removePadding(
           context: context,
           removeTop: true,
-          child: isLoading ? Center(child: Text("Loading"),) : ListView.builder(
+          child: isLoading ? const Center(child: Text("Loading"),) : ListView.builder(
             itemCount: currencies.length,
             itemBuilder: (BuildContext context, int index) =>
-              ListItem(assetId: currencies[index]['asset_id'], rate: currencies[index]['rate'],),
+              ListItem(assetId: currencies[index]['asset_id'], rate: currencies[index]['rate'], baseCurrency: widget.baseCurrency,),
           ),
         ),
       ),

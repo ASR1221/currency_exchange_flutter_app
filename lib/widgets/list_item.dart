@@ -5,8 +5,9 @@ import '../extensions/custom_theme_extension.dart';
 import "../constants/colors.dart" as colors;
 
 class ListItem extends StatefulWidget {
-  ListItem({super.key, required this.assetId, required this.rate});
+  ListItem({super.key, required this.assetId, required this.rate, required this.baseCurrency});
 
+  String baseCurrency;
   String assetId;
   double rate;
 
@@ -19,7 +20,7 @@ class _ListItemState extends State<ListItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => CurrencyDetailsPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => CurrencyDetailsPage(assetId: widget.assetId, baseCurrency: widget.baseCurrency,)));
       },
       child: Container(
         height: 52,

@@ -1,20 +1,52 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
 import 'package:fl_chart/fl_chart.dart';
 
 import '../constants/colors.dart' as colors;
 
 class CustomChart extends StatefulWidget {
-  const CustomChart({super.key});
+  CustomChart({super.key, required this.data});
+
+  dynamic data;
 
   @override
   State<CustomChart> createState() => _CustomChartState();
 }
 
 class _CustomChartState extends State<CustomChart> {
-  final List<FlSpot> dummyData1 = List.generate(10, (index) {
-    return FlSpot(index.toDouble(), index * Random().nextDouble());
-  });
+
+  List<FlSpot> chartSpots = [];
+
+  @override
+  void initState() {
+    if (widget.data == null) {
+      chartSpots = [
+        const FlSpot(0, 0),
+        const FlSpot(0, 0),
+      ];
+      return;
+    }
+    
+    for (var i = 0; i < widget.data.length; i++) {
+      chartSpots.add(FlSpot(i.toDouble(), widget.data[i]['rate'].toDouble()));
+    }
+
+    super.initState();
+  }
+
+  // @override
+  // didUpdateWidget(CustomChart oldWidget) {
+  //   super.didUpdateWidget(oldWidget);
+
+  //   print("hi INSIDE");
+  //   if (widget.data != null) {
+  //     setState(() {
+  //       chartSpots.clear();
+  //       for (var i = 0; i < widget.data.length; i++) {
+  //         chartSpots.add(FlSpot(i.toDouble(), widget.data[i]['rate'].toDouble()));
+  //       }
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +54,27 @@ class _CustomChartState extends State<CustomChart> {
       padding: const EdgeInsets.all(10),
       width: double.infinity,
       height: 260,
-      child: LineChart(
+      child: widget.data == null ? Text("Loading") : LineChart(
         LineChartData(
           gridData: const FlGridData(show: false),
-          titlesData: const FlTitlesData(
-            topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-            rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-            leftTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+          titlesData: FlTitlesData(
+            topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+            bottomTitles: AxisTitles(
+              sideTitles: SideTitles(
+                interval: 4,
+                showTitles: true,
+                getTitlesWidget: (value, meta) {
+                  if (widget.data != null) {
+                    return Text(widget.data[value.toInt()]['date'], style: const TextStyle(fontSize: 8),);
+                  }
+                  return Text(value.toString(), style: const TextStyle(fontSize: 8),);
+                },
+              ),
+            ),
           ),
-          backgroundColor: Colors.transparent,  // test bg color
+          backgroundColor: Colors.transparent,
           borderData: FlBorderData(show: false),
           lineTouchData: LineTouchData(
             touchTooltipData: LineTouchTooltipData(
@@ -54,7 +98,7 @@ class _CustomChartState extends State<CustomChart> {
             LineChartBarData(
               dotData: const FlDotData(show: false),
               isStrokeCapRound: true,
-              spots: dummyData1,
+              spots: chartSpots,
               isCurved: true,
               barWidth: 3,
               color: colors.bottomNavBarActiveColor,

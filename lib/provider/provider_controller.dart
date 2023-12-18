@@ -7,6 +7,8 @@ class ProviderController extends ChangeNotifier {
     // load theme from preferences on initialization
     _currentThemeId = _prefs.getInt("themeId") ?? 0;
     _baseCurrency = _prefs.getString("baseCurrency") ?? "USD";
+    _starredCurrencies = _prefs.getStringList("starredCurrencies") ?? [];
+    _isFirstEnter = _prefs.getBool("isFirstEnter") ?? true;
   }
 
   final SharedPreferences _prefs;
@@ -15,10 +17,21 @@ class ProviderController extends ChangeNotifier {
   int _currentThemeId = 0;
   String _baseCurrency = "";
 
+  List<String> _starredCurrencies = [];
+
+  bool _isFirstEnter = true;
+
+  String _timeAmount = "hour";
+
   // getters
   int get currentThemeId => _currentThemeId;
 
   String get baseCurrency => _baseCurrency;
+  List<String> get starredCurrencies => _starredCurrencies;
+
+  bool get isFirstEnter => _isFirstEnter;
+
+  String get timeAmount => _timeAmount;
 
   void setTheme(int theme) {
     _currentThemeId = theme;
@@ -34,6 +47,29 @@ class ProviderController extends ChangeNotifier {
     _baseCurrency = newBase;
     notifyListeners();
     _prefs.setString("baseCurrency", _baseCurrency);
+  }
+
+  void addStarredCurrency(String newStarred) {
+    _starredCurrencies.add(newStarred);
+    notifyListeners();
+    _prefs.setStringList("starredCurrencies", _starredCurrencies);
+  }
+
+  void removeStarredCurrency(String removedStarred) {
+    _starredCurrencies.remove(removedStarred);
+    notifyListeners();
+    _prefs.setStringList("starredCurrencies", _starredCurrencies);
+  }
+
+  void endFirstEnter() {
+    _isFirstEnter = false;
+    notifyListeners();
+    _prefs.setBool("isFirstEnter", _isFirstEnter);
+  }
+
+  void setTimeAmount(String newAmount) {
+    _timeAmount = newAmount;
+    notifyListeners();
   }
 }
 
