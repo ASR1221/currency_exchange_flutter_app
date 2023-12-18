@@ -53,7 +53,7 @@ class _TopBarState extends State<TopBar> {
 
     if (widget.isOpen) {
 
-      Future.delayed(const Duration(milliseconds: 150), () {
+      Future.delayed(const Duration(milliseconds: 250), () {
         setState(() {
           topBarContent = [
             const SizedBox(height: 50,),
@@ -70,7 +70,7 @@ class _TopBarState extends State<TopBar> {
                 const SizedBox(width: 50),
               ]
             ),
-            const SizedBox(height: 30,),
+            const SizedBox(height: 40,),
             Row(children: [
               const SizedBox(width: 9,),
               SizedBox(width: 30, child: Image.asset("images/coin.png")),
@@ -102,6 +102,17 @@ class _TopBarState extends State<TopBar> {
                     const Text("About App", style: TextStyle(fontSize: 16, color: colors.lightThemeTextColor),),
                   ],
                 ),
+              ),
+            ),
+            const SizedBox(height: 75,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
+                children: [
+                  Image.asset("images/logo.png", width: 50, height: 50,),
+                  const SizedBox(width: 20,),
+                  const Text("Currensee", style: TextStyle(fontSize: 28, color: colors.lightThemeTextColor),)
+                ],
               ),
             ),
           ];
