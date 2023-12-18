@@ -1,16 +1,35 @@
-# final_project
+# Currensee
 
-A new Flutter project.
+A crypto currency flutter app that display and convert crypto currency rates.
 
-## Getting Started
+It uses the [CoinAPI.io](https://www.coinapi.io/) to get all data.
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- List Crypto Currencies with their rate.
+- Star any Crypto Currency to watch it's rate it once your enter the app.
+- convert any Crypto Currency to many real world currencies.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Set up and run on your device
+
+- Install flutter on your machine.
+- Download this project.
+- Open your terminal in the project folder.
+- Type `flutter run` and hit `Enter`.
+
+
+## Dependencies
+
+- fl_chart: Display any kind and style it easily.
+- dropdown_button2: A searchable dropdown list.
+- shared_preferences: Store state even when the app in closed.
+- provider: Share state easily among files.
+- url_launcher: Launch a link throw an external browser.
+- http: Make HTTP request to the API used in the app.
+- intl: Format date.
+
+
+## Demo
+
+Soon.
