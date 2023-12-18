@@ -8,7 +8,7 @@ It uses the [CoinAPI.io](https://www.coinapi.io/) to get all data.
 
 - List Crypto Currencies with their rate.
 - Star any Crypto Currency to watch it's rate it once your enter the app.
-- convert any Crypto Currency to many real world currencies.
+- Convert any Crypto Currency to many real world currencies.
 
 
 ## Set up and run on your device
