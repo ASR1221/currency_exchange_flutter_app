@@ -48,11 +48,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 activeIcon: SizedBox(width: 25, child: Image.asset("images/convert-filled.png")),
                 label: 'Converter',
               ),
-              BottomNavigationBarItem(
-                icon: SizedBox(width: 25, child: Image.asset("images/news.png")),
-                activeIcon: SizedBox(width: 25, child: Image.asset("images/news-filled.png")),
-                label: 'News',
-              ),
             ],
           ),
         ),
