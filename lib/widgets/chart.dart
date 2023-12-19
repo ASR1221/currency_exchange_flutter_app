@@ -33,21 +33,20 @@ class _CustomChartState extends State<CustomChart> {
     super.initState();
   }
 
-  // @override
-  // didUpdateWidget(CustomChart oldWidget) {
-  //   super.didUpdateWidget(oldWidget);
+  @override
+  didUpdateWidget(CustomChart oldWidget) {
+    super.didUpdateWidget(oldWidget);
 
-  //   print("hi INSIDE");
-  //   if (widget.data != null) {
-  //     setState(() {
-  //       chartSpots.clear();
-  //       for (var i = 0; i < widget.data.length; i++) {
-  //         chartSpots.add(FlSpot(i.toDouble(), widget.data[i]['rate'].toDouble()));
-  //       }
-  //     });
-  //   }
-  // }
-
+    if (widget.data != oldWidget.data) {
+      setState(() {
+        chartSpots.clear();
+        for (var i = 0; i < widget.data.length; i++) {
+          chartSpots.add(FlSpot(i.toDouble(), widget.data[i]['rate'].toDouble()));
+        }
+      });
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,10 +65,11 @@ class _CustomChartState extends State<CustomChart> {
                 interval: 4,
                 showTitles: true,
                 getTitlesWidget: (value, meta) {
-                  if (widget.data != null) {
-                    return Text(widget.data[value.toInt()]['date'], style: const TextStyle(fontSize: 8),);
+                  int index = value.toInt();
+                  if (widget.data != null && index < widget.data.length) {
+                    return Text(widget.data[index]['date'], style: const TextStyle(fontSize: 8));
                   }
-                  return Text(value.toString(), style: const TextStyle(fontSize: 8),);
+                  return const Text('');
                 },
               ),
             ),
