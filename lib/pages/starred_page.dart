@@ -13,10 +13,7 @@ class StarredPage extends StatefulWidget {
   State<StarredPage> createState() => _StarredPageState();
 }
 
-class _StarredPageState extends State<StarredPage> with AutomaticKeepAliveClientMixin<StarredPage> {
-
-  @override
-  bool get wantKeepAlive => true;
+class _StarredPageState extends State<StarredPage> {
 
   bool isLoading = true;
   late List starredItems;
@@ -48,7 +45,6 @@ class _StarredPageState extends State<StarredPage> with AutomaticKeepAliveClient
   @override
   Widget build(BuildContext context) {
 
-    super.build(context);
     return Padding(
       padding: const EdgeInsets.only(top: 120, left: 10, right: 10, bottom: 22),
       child: MediaQuery.removePadding(
@@ -57,7 +53,7 @@ class _StarredPageState extends State<StarredPage> with AutomaticKeepAliveClient
         child: widget.starredCurrencies == null ? const Center(child: Text("No starred Items"),) :
           isLoading ? const Center(child: Text("Loading"),) :
             ListView.builder(
-              itemCount: starredItems.length,
+              itemCount: widget.starredCurrencies.length,
               itemBuilder: (BuildContext context, int index) {
                 if (index == 0) {
                   return Column(
