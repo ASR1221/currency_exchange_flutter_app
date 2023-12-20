@@ -38,6 +38,10 @@ dependencies:
   url_launcher:
   http:
   intl:
+  bip39:
+  ed25519_hd_key:
+  hex:
+  web3dart:
 
 dev_dependencies:
   flutter_test:
