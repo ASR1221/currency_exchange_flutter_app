@@ -44,3 +44,4 @@ app.*.map.json
 /android/app/release
 
 /placeholder
+/lib/constants/wallet.dart
