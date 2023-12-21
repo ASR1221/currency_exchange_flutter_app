@@ -84,8 +84,8 @@ const walletCardGradient = LinearGradient(
   end: Alignment.bottomRight,
   stops: [0.4, 1],
   colors: [
-    Color.fromARGB(255, 105, 67, 238),
-    Color(0x117250EE),
+    Color.fromARGB(238, 114, 80, 238),
+    Color.fromARGB(88, 115, 172, 225),
   ],
 );
 
