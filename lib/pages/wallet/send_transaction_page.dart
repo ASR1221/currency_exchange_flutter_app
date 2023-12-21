@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/services.dart';
 
+import '../../app.dart';
+import '../../provider/provider_controller.dart';
+import '../../utils/wallet.dart';
 import '../../widgets/background_gradient_wrapper.dart';
 import '../../widgets/small_top_bar.dart';
 import '../../constants/colors.dart' as colors;
@@ -13,8 +19,60 @@ class SendTransactionPage extends StatefulWidget {
 
 class _SendTransactionPageState extends State<SendTransactionPage> {
 
+  TextEditingController receiverController = TextEditingController();
+  TextEditingController amountController = TextEditingController();
+
+
+  late SharedPreferences prefs;
+
   void changePage (int selectedPageIndex) {
     Navigator.pop(context);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      _asyncMethod();
+    });
+  }
+
+  _asyncMethod() async {
+
+    prefs = await SharedPreferences.getInstance();
+
+    if (prefs.getString("publicKey") == null || prefs.getString("publicKey")!.isEmpty) {
+      if (context.mounted) {
+        final provider = Provider.of<ProviderController>(context, listen: false);
+
+        Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(provider: provider,)));
+      }
+    }
+  }
+
+  Future<void> _coppyToClipboard(BuildContext context, String payload) async {
+    Clipboard.setData(ClipboardData(text: payload));
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Seed phrase copied'),),
+    );
+  }
+
+  Future<void> sendTransaction() async {
+
+    if (receiverController.text.isEmpty || amountController.text.isEmpty) {
+      return;
+    }
+
+    final privateKey = prefs.getString("privateKey");
+
+    WalletAddress service = WalletAddress();
+    
+    await service.sendTransaction(receiverController.text, amountController.text, privateKey ?? "");
+
+    await _coppyToClipboard(context, "Transaction Completed");
+
+    if (context.mounted) Navigator.pop(context);
   }
 
   @override
@@ -40,19 +98,23 @@ class _SendTransactionPageState extends State<SendTransactionPage> {
 
                 const Text("Receiver Address", style: TextStyle(fontSize: 18),),
 
-                TextField(),
+                TextField(
+                  controller: receiverController,
+                ),
 
                 const SizedBox(height: 40,),
 
                 const Text("Amount", style: TextStyle(fontSize: 18),),
 
-                TextField(),
+                TextField(
+                  controller: amountController,
+                ),
 
                 const SizedBox(height: 120,),
 
                 GestureDetector(
                   onTap: () {
-                    // TODO: confirm transaction
+                    sendTransaction();
                   },
                   child: Container(
                     width: double.infinity,

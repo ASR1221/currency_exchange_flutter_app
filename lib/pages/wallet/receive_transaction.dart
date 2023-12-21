@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../app.dart';
+import '../../provider/provider_controller.dart';
 import '../../widgets/background_gradient_wrapper.dart';
 import '../../widgets/small_top_bar.dart';
 import '../../constants/colors.dart' as colors;
@@ -14,7 +18,7 @@ class ReceiveTransactionPage extends StatefulWidget {
 
 class _ReceiveTransactionPageState extends State<ReceiveTransactionPage> {
 
-  String publicKey = "0xnejfnadfn";
+  String publicKey = "";
 
   void changePage (int selectedPageIndex) {
     Navigator.pop(context);
@@ -25,6 +29,32 @@ class _ReceiveTransactionPageState extends State<ReceiveTransactionPage> {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Seed phrase copied'),),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      _asyncMethod();
+    });
+  }
+
+  _asyncMethod() async {
+
+    final prefs = await SharedPreferences.getInstance();
+
+    if (prefs.getString("publicKey") == null || prefs.getString("publicKey")!.isEmpty) {
+      if (context.mounted) {
+        final provider = Provider.of<ProviderController>(context, listen: false);
+
+        Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(provider: provider,)));
+      }
+    }
+
+    setState(() {
+      publicKey = prefs.getString("publicKey") ?? "";
+    });
   }
 
   @override

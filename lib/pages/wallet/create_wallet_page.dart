@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'generate_seed_page.dart';
 import '../../widgets/background_gradient_wrapper.dart';
@@ -16,6 +17,20 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
 
   void changePage (int selectedPageIndex) {
     Navigator.pop(context);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  _asyncMethod() async {
+
+    final prefs = await SharedPreferences.getInstance();
+
+    if (prefs.getString("publicKey") == null || prefs.getString("publicKey")!.isEmpty) {
+      if (context.mounted) Navigator.pop(context);
+    }
   }
 
   @override

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../utils/wallet.dart';
 import '../widgets/wallet_balance.dart';
 import '../widgets/wallet_create.dart';
 import '../models/crypto_model.dart';
@@ -20,6 +22,8 @@ class _StarredPageState extends State<StarredPage> {
   bool isLoading = true;
   late List starredItems;
 
+  bool isLoggedIn = false;
+
   @override
   void initState() {
     super.initState();
@@ -32,6 +36,16 @@ class _StarredPageState extends State<StarredPage> {
 
   _asyncMethod() async {
     CryptoModel cryptoModelObj = CryptoModel();
+
+    final prefs = await SharedPreferences.getInstance();
+
+    final publicKey = prefs.getString("publicKey");
+
+    if (publicKey != null && publicKey!.isNotEmpty) {
+      setState(() {
+        isLoggedIn = true;
+      });
+    }
 
     List results =
       await Future.wait(widget.starredCurrencies.map(
@@ -47,7 +61,7 @@ class _StarredPageState extends State<StarredPage> {
   Column walletSection({bool isLoading = false, bool isNull = false}) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       const SizedBox(height: 10,),
-      WalletBalance(), // TODO: make a condition to show WalletCreate or WalletBalance
+      isLoggedIn ? const WalletBalance() : const WalletCreate(),
       const SizedBox(height: 30,),
       const Padding(
         padding: EdgeInsets.symmetric(horizontal: 12),

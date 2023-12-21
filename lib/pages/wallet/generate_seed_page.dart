@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import './wallet_page.dart';
+import '../../utils/wallet.dart';
 import '../../widgets/background_gradient_wrapper.dart';
 import '../../widgets/small_top_bar.dart';
 import '../../constants/colors.dart' as colors;
@@ -15,7 +17,7 @@ class GenerateSeedPage extends StatefulWidget {
 
 class _GenerateSeedPageState extends State<GenerateSeedPage> {
 
-  String seedPhrase = 'word aafas askdm asdasa asd asdasd asdsadk kjhfd';
+  String seedPhrase = '';
 
   void changePage (int selectedPageIndex) {
     Navigator.pop(context);
@@ -26,6 +28,32 @@ class _GenerateSeedPageState extends State<GenerateSeedPage> {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Seed phrase copied'),),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      _asyncMethod();
+    });
+  }
+
+  _asyncMethod() async {
+
+    final prefs = await SharedPreferences.getInstance();
+
+    WalletAddress service = WalletAddress();
+    final mnemonic = service.generateMnemonic();
+    final privateKey = await service.getPrivateKey(mnemonic);
+    final publicKey = service.getPublicKey(privateKey).hex;
+
+    prefs.setString("privateKey", privateKey);
+    prefs.setString("publicKey", publicKey);
+
+    setState(() {
+      seedPhrase = mnemonic;
+    });
   }
 
   @override
@@ -88,8 +116,7 @@ class _GenerateSeedPageState extends State<GenerateSeedPage> {
 
                 GestureDetector(
                   onTap: () {
-                    // TODO: Store public and private keys in shared pref
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => WalletPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const WalletPage()));
                   },
                   child: Container(
                     width: double.infinity,

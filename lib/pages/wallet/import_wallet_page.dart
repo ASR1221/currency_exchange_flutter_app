@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import './wallet_page.dart';
+import '../../utils/wallet.dart';
 import '../../widgets/background_gradient_wrapper.dart';
 import '../../widgets/small_top_bar.dart';
 import '../../constants/colors.dart' as colors;
@@ -13,8 +16,33 @@ class ImportWalletPage extends StatefulWidget {
 
 class _ImportWalletPageState extends State<ImportWalletPage> {
 
+  TextEditingController controller = TextEditingController();
+
+  bool isError = false;
+
   void changePage (int selectedPageIndex) {
     Navigator.pop(context);
+  }
+
+  _asyncMethod() async {
+
+    final prefs = await SharedPreferences.getInstance();
+
+    WalletAddress service = WalletAddress();
+    final mnemonic = controller.text;
+    try {
+      final privateKey = await service.getPrivateKey(mnemonic);
+      final publicKey = service.getPublicKey(privateKey).hex;
+
+      prefs.setString("privateKey", privateKey);
+      prefs.setString("publicKey", publicKey);
+
+      if (context.mounted) Navigator.push(context, MaterialPageRoute(builder: (context) => const WalletPage()));
+    } catch (e) {
+      setState(() {
+        isError = true;
+      });
+    }
   }
 
   @override
@@ -40,7 +68,16 @@ class _ImportWalletPageState extends State<ImportWalletPage> {
 
                 const Text("Seed Phrase", style: TextStyle(fontSize: 18),),
 
-                TextField(),
+                TextField(
+                  controller: controller,
+                  onChanged: (x) {
+                    setState(() {
+                      isError = true;
+                    });
+                  },
+                ), // TODO: style textfield
+
+                if (isError) const Text("Error: not a seed phrase", style: TextStyle(color: Colors.red),),
 
                 const SizedBox(height: 140,),
 

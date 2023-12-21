@@ -1,16 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import '../pages/wallet/wallet_page.dart';
 import '../constants/colors.dart' as colors;
+import '../pages/wallet/wallet_page.dart';
+import '../utils/wallet.dart';
+import '../utils/hexa_to_double.dart';
 
-class WalletBalance extends StatelessWidget {
-  WalletBalance({super.key});
+class WalletBalance extends StatefulWidget {
+  const WalletBalance({super.key});
 
-  // TODO: get balance from infura
-  final String walletBalanceTx = "";
+  @override
+  State<WalletBalance> createState() => _WalletBalanceState();
+}
 
-  // TODO: add loading state
+class _WalletBalanceState extends State<WalletBalance> {
+
+  String walletBalance = '0';
+
   bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      _asyncMethod();
+    });
+
+  }
+
+  _asyncMethod() async {
+
+    final prefs = await SharedPreferences.getInstance();
+
+    final publicKey = prefs.getString("publicKey");
+
+    WalletAddress service = WalletAddress();
+
+    final balance = await service.getBalance(publicKey!);
+
+    print(balance);
+    if (!mounted) return;
+    setState(() {
+      walletBalance = hexStringToDouble(balance['result']).toString();
+      isLoading = false;
+    });
+
+    print(walletBalance);
+    print(isLoading);
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +72,7 @@ class WalletBalance extends StatelessWidget {
               children: [
                 const Text("Wallet Balance", style: TextStyle(fontSize: 22, color: colors.darkThemeTextColor,),),
                 const SizedBox(height: 15,),
-                isLoading ? const Text("Loading") : Text(walletBalanceTx, style: const TextStyle(fontSize: 24, color: colors.darkThemeTextColor,),),
+                isLoading ? const Text("Loading") : Text(walletBalance, style: const TextStyle(fontSize: 24, color: colors.darkThemeTextColor,),),
               ],
             ),
           ),
