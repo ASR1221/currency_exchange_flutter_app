@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../pages/wallet/import_wallet_page.dart';
+import '../pages/wallet/create_wallet_page.dart';
 import '../constants/colors.dart' as colors;
 import '../extensions/custom_theme_extension.dart';
 
@@ -27,7 +29,9 @@ class WalletCreate extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GestureDetector(
-                onTap: () {}, // TODO: navigate to create wallet page
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const CreateWalletPage()));
+                },
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
                   alignment: Alignment.center,
@@ -40,7 +44,9 @@ class WalletCreate extends StatelessWidget {
               ),
               const SizedBox(height: 25,),
               GestureDetector(
-                onTap: () {}, // TODO: navigate to import wallet page
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ImportWalletPage()));
+                },
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
                   alignment: Alignment.center,

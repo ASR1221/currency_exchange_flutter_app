@@ -47,7 +47,7 @@ class _StarredPageState extends State<StarredPage> {
   Column walletSection({bool isLoading = false, bool isNull = false}) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       const SizedBox(height: 10,),
-      WalletCreate(), // TODO: make a condition to show WalletCreate or WalletBalance
+      WalletBalance(), // TODO: make a condition to show WalletCreate or WalletBalance
       const SizedBox(height: 30,),
       const Padding(
         padding: EdgeInsets.symmetric(horizontal: 12),

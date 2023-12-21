@@ -90,6 +90,17 @@ const walletCardGradient = LinearGradient(
 );
 
 
+const longButtonGradient = LinearGradient(
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+  stops: [0.5, 1],
+  colors: [
+    Colors.cyan,
+    Color(0xdd368FCF),
+  ],
+);
+
+
 // class effect to test
 // ClipRRect(
 //   borderRadius:BorderRadius.all(Radius.circular(25)),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../pages/wallet/wallet_page.dart';
 import '../constants/colors.dart' as colors;
-import '../extensions/custom_theme_extension.dart';
 
 class WalletBalance extends StatelessWidget {
   WalletBalance({super.key});
@@ -38,7 +38,9 @@ class WalletBalance extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () {}, // TODO: navigate to wallet page
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => WalletPage()));
+            }, // TODO: navigate to wallet page
             child: Container(
               width: 60,
               height: 60,

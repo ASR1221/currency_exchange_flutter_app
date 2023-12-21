@@ -2,17 +2,11 @@ import 'package:flutter/material.dart';
 
 import "../constants/colors.dart" as colors;
 
-class BottomNavBar extends StatefulWidget {
+class BottomNavBar extends StatelessWidget {
   BottomNavBar({super.key, required this.selectedIndex, required this.changePage});
 
   int selectedIndex;
   final Function(int x) changePage;
-
-  @override
-  State<BottomNavBar> createState() => _BottomNavBarState();
-}
-
-class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +22,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
             elevation: 0,
             backgroundColor: Colors.transparent,
             type: BottomNavigationBarType.fixed,
-            currentIndex: widget.selectedIndex,
+            currentIndex: selectedIndex,
             selectedItemColor: colors.bottomNavBarActiveColor,
             unselectedItemColor: colors.lightThemeTextColor,
-            onTap: widget.changePage,
+            onTap: changePage,
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: SizedBox(width: 25, child: Image.asset("images/home.png")),
