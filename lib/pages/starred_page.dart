@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/wallet_balance.dart';
+import '../widgets/wallet_create.dart';
 import '../models/crypto_model.dart';
 import "../widgets/fav_card.dart";
 
@@ -42,6 +44,22 @@ class _StarredPageState extends State<StarredPage> {
     });
   }
 
+  Column walletSection({bool isLoading = false, bool isNull = false}) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      const SizedBox(height: 10,),
+      WalletCreate(), // TODO: make a condition to show WalletCreate or WalletBalance
+      const SizedBox(height: 30,),
+      const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12),
+        child: Text("Starred Currencies", style: TextStyle(fontSize: 22),),
+      ),
+      SizedBox(height: isLoading || isNull ? 50 : 20,),
+      if (isLoading || isNull) Center(
+        child: Text(isNull ? "No Starred Currencies" : "Loading"),
+      )
+    ],);
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -50,15 +68,15 @@ class _StarredPageState extends State<StarredPage> {
       child: MediaQuery.removePadding(
         context: context,
         removeTop: true,
-        child: widget.starredCurrencies == null ? const Center(child: Text("No starred Items"),) :
-          isLoading ? const Center(child: Text("Loading"),) :
+        child: widget.starredCurrencies == null ? walletSection(isNull: true) :
+          isLoading ? walletSection(isLoading: true):
             ListView.builder(
               itemCount: widget.starredCurrencies.length,
               itemBuilder: (BuildContext context, int index) {
                 if (index == 0) {
                   return Column(
                     children: [
-                      const SizedBox(height: 10,),
+                      walletSection(),
                       FavCard(currency: widget.starredCurrencies[index], data: starredItems[index], baseCurrency: widget.baseCurrency,),
                     ],
                   );

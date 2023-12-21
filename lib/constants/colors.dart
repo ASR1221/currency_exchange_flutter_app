@@ -79,6 +79,17 @@ const loadingPlaceholderGradient = LinearGradient(
 );
 
 
+const walletCardGradient = LinearGradient(
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+  stops: [0.4, 1],
+  colors: [
+    Color.fromARGB(255, 105, 67, 238),
+    Color(0x117250EE),
+  ],
+);
+
+
 // class effect to test
 // ClipRRect(
 //   borderRadius:BorderRadius.all(Radius.circular(25)),

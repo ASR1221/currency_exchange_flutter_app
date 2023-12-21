@@ -34,9 +34,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
             onTap: widget.changePage,
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: SizedBox(width: 25, child: Image.asset("images/star.png")),
-                activeIcon: SizedBox(width: 25, child: Image.asset("images/star-filled.png")),
-                label: 'Starred',
+                icon: SizedBox(width: 25, child: Image.asset("images/home.png")),
+                activeIcon: SizedBox(width: 25, child: Image.asset("images/home-filled.png")),
+                label: 'Home',
               ),
               BottomNavigationBarItem(
                 icon: SizedBox(width: 25, child: Image.asset("images/coins.png")),
