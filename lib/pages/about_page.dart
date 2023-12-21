@@ -34,12 +34,15 @@ class _AboutPageState extends State<AboutPage> {
               children: [
                 const SizedBox(height: 30,),
 
-                // Image.network(""),
-                const Text("App LOGO", textAlign: TextAlign.center, style: TextStyle(fontSize: 24),),
+                Image.asset("images/logo.png", width: 140, height: 140,),
+
+                const SizedBox(height: 15,),
+
+                const Text("CurrenSee", textAlign: TextAlign.center, style: TextStyle(fontSize: 28),),
           
                 const SizedBox(height: 100,),
           
-                const Text("Created By: Abdullah Salah", textAlign: TextAlign.center, style: TextStyle(fontSize: 20),),
+                const Text("Created By Abdullah Salah", textAlign: TextAlign.center, style: TextStyle(fontSize: 20),),
           
                 const SizedBox(height: 25,),
           
@@ -54,15 +57,15 @@ class _AboutPageState extends State<AboutPage> {
                       onTap: () => launchUrl(Uri.parse("https://www.linkedin.com/in/abdullah-salah-29209b235")),
                       child: Image.asset("images/linked.png", width: 50, height: 50,),
                     ),
+                    
+                    InkWell(
+                      onTap: () => launchUrl(Uri.parse("mailto:asr12211@outlook.com")),
+                      child: Image.asset("images/email.png", width: 55, height: 55,),
+                    ),
           
                     InkWell(
                       onTap: () => launchUrl(Uri.parse("https://github.com/ASR1221?tab=repositories")),
                       child: Image.asset("images/github.png", width: 50, height: 50,),
-                    ),
-          
-                    InkWell(
-                      onTap: () => launchUrl(Uri.parse("mailto:asr12211@outlook.com")),
-                      child: Image.asset("images/email.png", width: 55, height: 55,),
                     ),
           
                     InkWell(
