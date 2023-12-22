@@ -1,4 +1,4 @@
-# Currensee
+# CurrenSee
 
 A crypto wallet app flutter app that create, send and receive crypto currencies.
 
@@ -10,8 +10,9 @@ A crypto wallet app flutter app that create, send and receive crypto currencies.
 
 - Create crypto currency wallet to send and receive crypto currencies.
 - List Crypto Currencies with their rate.
-- Star any Crypto Currency to watch it's rate it once your enter the app.
+- Get historical data for any cuurency and display it in charts.
 - Convert any Crypto Currency to many real world currencies.
+- Crypto news from many different sources.
 
 
 ## Set up and run on your device
