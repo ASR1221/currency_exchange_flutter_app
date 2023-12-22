@@ -63,8 +63,8 @@ class IntroScreensPageState extends State<IntroScreensPage> {
       key: introKey,
       globalBackgroundColor: isLight ? colors.mainLightBgColor : colors.mainDarkBgColor ,
       allowImplicitScrolling: true,
-      autoScrollDuration: 4000,
-      infiniteAutoScroll: true,
+      // autoScrollDuration: 4000,
+      // infiniteAutoScroll: true,
       pages: [
         PageViewModel(
           title: "CurrenSee",
