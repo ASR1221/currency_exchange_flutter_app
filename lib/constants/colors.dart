@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+// main colors
+const mainPurpuleColor = Color(0xff7250EE);
+const mainDarkBgColor = Color(0xff0F1541);
+const mainLightBgColor = Color(0xfff9fafb);
+
+
 // Text
 const lightThemeTextColor = Color(0xff111111);
 const darkThemeTextColor = Color(0xfff9fafb);
@@ -49,6 +55,7 @@ Color bottomNavBarActiveColor = Colors.cyan;
 // Gradients
 const topNavGradient = LinearGradient(
   transform: GradientRotation(math.pi/4),
+  stops: [0.4, 1],
   colors: [Color(0xff7250EE), Color(0xff73ACE1)],
 );
 
