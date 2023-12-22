@@ -160,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(_height),
         child: _selectedPageIndex == 2 ? SmallTopBar(title: "Converter", changePage: changePage,) : TopBar(
-          pageTitle: _selectedPageIndex == 0 ? "Starred" : _selectedPageIndex == 1 ? "Currencies" : _selectedPageIndex == 3 ? "News" : "",
+          pageTitle: _selectedPageIndex == 0 ? "Home" : _selectedPageIndex == 1 ? "Currencies" : _selectedPageIndex == 3 ? "News" : "",
           isOpen: _isOpen,
           setHeight: setHeight
         ),
@@ -169,7 +169,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: BackGroundGradientWrapper(
         childApp: PageView(
           controller: _pageController,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           onPageChanged: (selectedPageIndex) {
             setState(() {
               _selectedPageIndex = selectedPageIndex;
