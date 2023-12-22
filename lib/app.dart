@@ -3,12 +3,12 @@ import "package:flutter/services.dart";
 import 'package:provider/provider.dart';
 
 import './pages/news_page.dart';
-import './pages/welcome_page.dart';
 import './pages/converter_page.dart';
 import "./pages/currencies_page.dart";
 import "./pages/starred_page.dart";
 import './widgets/background_gradient_wrapper.dart';
 import './widgets/small_top_bar.dart';
+import './pages/intro/intro_page.dart';
 
 import "./constants/colors.dart" as colors;
 import "./widgets/top_bar.dart";
@@ -88,7 +88,7 @@ class MyApp extends StatelessWidget {
         theme: lightTheme(context),
         darkTheme: darkTheme(context),
         themeMode: themeMode(provider),
-        home: MyHomePage(),
+        home: provider.isFirstEnter ? const IntroScreensPage() : MyHomePage(),
       ),
     );
   }
