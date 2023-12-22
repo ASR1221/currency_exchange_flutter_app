@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import './wallet_page.dart';
+import '../../constants/colors.dart' as colors;
 import '../../utils/wallet.dart';
 import '../../widgets/background_gradient_wrapper.dart';
 import '../../widgets/small_top_bar.dart';
-import '../../constants/colors.dart' as colors;
 
 class ImportWalletPage extends StatefulWidget {
   const ImportWalletPage({super.key});
@@ -62,7 +62,7 @@ class _ImportWalletPageState extends State<ImportWalletPage> {
               children: [
                 const SizedBox(height: 10,),
 
-                const Text("Send Transaction", textAlign: TextAlign.center, style: TextStyle(fontSize: 32),),
+                const Text("Import Wallet", textAlign: TextAlign.center, style: TextStyle(fontSize: 32),),
 
                 const SizedBox(height: 60,),
 
