@@ -73,7 +73,7 @@ class _TopBarState extends State<TopBar> {
             const SizedBox(height: 40,),
             Row(children: [
               const SizedBox(width: 9,),
-              SizedBox(width: 30, child: Image.asset("images/coin.png")),
+              SizedBox(width: 29, child: Image.asset("images/coin.png")),
               const SizedBox(width: 13,),
               const Text("Base Currency:", style: TextStyle(fontSize: 16, color: colors.lightThemeTextColor),),
               const SizedBox(width: 10,),
@@ -82,7 +82,7 @@ class _TopBarState extends State<TopBar> {
             const SizedBox(height: 20,),
             Row(children: [
               const SizedBox(width: 12,),
-              SizedBox(width: 25, child: Image.asset("images/theme.png")),
+              SizedBox(width: 23, child: Image.asset("images/theme.png")),
               const SizedBox(width: 15,),
               const Text("Theme:", style: TextStyle(fontSize: 16, color: colors.lightThemeTextColor),),
               const ThemeSelection(),
@@ -97,7 +97,7 @@ class _TopBarState extends State<TopBar> {
                 child: Row(
                   children: [
                     const SizedBox(width: 12,),
-                    SizedBox(width: 25, child: Image.asset("images/about.png")),
+                    SizedBox(width: 23, child: Image.asset("images/about.png")),
                     const SizedBox(width: 15,),
                     const Text("About App", style: TextStyle(fontSize: 16, color: colors.lightThemeTextColor),),
                   ],
@@ -109,9 +109,9 @@ class _TopBarState extends State<TopBar> {
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Row(
                 children: [
-                  Image.asset("images/logo.png", width: 50, height: 50,),
+                  Image.asset("images/logo.png", width: 40, height: 40,),
                   const SizedBox(width: 20,),
-                  const Text("Currensee", style: TextStyle(fontSize: 28, color: colors.lightThemeTextColor),)
+                  const Text("Currensee", style: TextStyle(fontSize: 24, color: colors.lightThemeTextColor),)
                 ],
               ),
             ),
