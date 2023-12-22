@@ -1,8 +1,10 @@
-import 'package:final_project/extensions/custom_theme_extension.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:provider/provider.dart';
 
+import '../../provider/provider_controller.dart';
+import '../../extensions/custom_theme_extension.dart';
 import '../../app.dart';
 import '../../constants/colors.dart' as colors;
 
@@ -17,6 +19,11 @@ class IntroScreensPageState extends State<IntroScreensPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
+
+    ProviderController provider = Provider.of<ProviderController>(context, listen: false);
+
+    provider.endFirstEnter();
+    
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (_) => MyHomePage()),
     );
