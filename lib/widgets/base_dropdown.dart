@@ -20,6 +20,9 @@ class _BaseDropdownState extends State<BaseDropdown> {
 
   final TextEditingController textEditingController = TextEditingController();
 
+  List<String> currencyList = [];
+  String selectedValue = "";
+
   Row menuItem(String item, bool isBase) {
     return Row(
       children: [
@@ -39,6 +42,13 @@ class _BaseDropdownState extends State<BaseDropdown> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    currencyList = !widget.isMainBase && widget.selectedValue == "BTC" ? currencies.allCryptos : currencies.allBases;
+    selectedValue = widget.selectedValue;
+  }
+
+  @override
   void dispose() {
     textEditingController.dispose();
     super.dispose();
@@ -46,8 +56,6 @@ class _BaseDropdownState extends State<BaseDropdown> {
 
   @override
   Widget build(BuildContext context) {
-
-    final currencyList = !widget.isMainBase && widget.selectedValue == "BTC" ? currencies.allCryptos : currencies.allBases;
 
     return Consumer<ProviderController>(
       builder: (context, provider, child) => Container(
@@ -60,7 +68,7 @@ class _BaseDropdownState extends State<BaseDropdown> {
           child: DropdownButton2<String>(
             isExpanded: true,
             hint: Text(
-              widget.isMainBase ? provider.baseCurrency : widget.selectedValue,
+              widget.isMainBase ? provider.baseCurrency : selectedValue,
               style: TextStyle(
                 fontSize: 14,
                 color: Theme.of(context).hintColor,
@@ -69,17 +77,19 @@ class _BaseDropdownState extends State<BaseDropdown> {
             items: currencyList
                 .map((item) => DropdownMenuItem(
                   value: item,
-                  child: menuItem(item, widget.isMainBase || (!widget.isMainBase && widget.selectedValue != "BTC")),
+                  child: menuItem(item, widget.isMainBase || (!widget.isMainBase && currencyList.contains("USD") )),
                 ))
                 .toList(),
-            value: widget.isMainBase ? provider.baseCurrency : widget.selectedValue,
+            value: widget.isMainBase ? provider.baseCurrency : selectedValue,
             onChanged: (value) {
               if (widget.isMainBase) {
                 provider.setBaseCurrency(value ?? "USD");
               } else {
-                setState(() {
-                  widget.selectedValue = value ?? "USD";
-                });
+                if (currencyList.contains(value)) {
+                  setState(() {
+                    selectedValue = value ?? "USD";
+                  });
+                }
               }
             },
             iconStyleData:
