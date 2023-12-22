@@ -16,10 +16,10 @@ class NewsCard extends StatefulWidget {
 class _NewsCardState extends State<NewsCard> {
 
   String trimText(String originalText,) {
-  if (originalText.length <= 50) {
+  if (originalText.length <= 55) {
     return originalText;
   } else {
-    return originalText.substring(0, 50) + '...';
+    return originalText.substring(0, 55) + '...';
   }
 }
 
