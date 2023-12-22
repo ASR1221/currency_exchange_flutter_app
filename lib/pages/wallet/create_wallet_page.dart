@@ -32,7 +32,7 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
 
     final prefs = await SharedPreferences.getInstance();
 
-    if (prefs.getString("publicKey") == null || prefs.getString("publicKey")!.isEmpty) {
+    if (prefs.getString("publicKey") != null || prefs.getString("publicKey")!.isNotEmpty) {
       if (context.mounted) Navigator.pop(context);
     }
   }
