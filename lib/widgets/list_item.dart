@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../pages/currency_details.dart';
 import '../extensions/custom_theme_extension.dart';
-import "../constants/colors.dart" as colors;
 
 class ListItem extends StatefulWidget {
   ListItem({super.key, required this.assetId, required this.rate, required this.baseCurrency});

@@ -53,7 +53,7 @@ class _FavCardState extends State<FavCard> {
             width: double.infinity,
             child: GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => 
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>
                   CurrencyDetailsPage(assetId: widget.currency, baseCurrency: widget.baseCurrency,)));
               },
               child: Container(

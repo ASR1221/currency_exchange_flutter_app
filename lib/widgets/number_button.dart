@@ -21,8 +21,8 @@ class DialNumberButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(11)
         ),
         child: Center(
-          child: btnNumber == "" ? Icon(Icons.backspace_rounded, color: colors.gradientBorderColor, size: 28,) :
-          Text(btnNumber, style: TextStyle(color: colors.gradientBorderColor, fontSize: 28),),
+          child: btnNumber == "" ? const Icon(Icons.backspace_rounded, color: colors.gradientBorderColor, size: 28,) :
+          Text(btnNumber, style: const TextStyle(color: colors.gradientBorderColor, fontSize: 28),),
         ),
       ),
     );

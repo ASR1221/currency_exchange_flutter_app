@@ -90,7 +90,7 @@ class _TopBarState extends State<TopBar> {
             const SizedBox(height: 20,),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => AboutPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutPage()));
               },
               child: Container(
                 alignment: Alignment.centerLeft,

@@ -14,11 +14,8 @@ class NewsModel {
     if (response.statusCode != 200) {
       return null;
     }
-    print(response.body);
 
     Map<String, dynamic> data = await jsonDecode(response.body);
-
-    print("hi3");
 
     final finalData = data['articles']['results'].map((x) => {
       'date': x['date'],

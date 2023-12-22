@@ -17,8 +17,6 @@ class IntroScreensPageState extends State<IntroScreensPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
-
-    
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (_) => MyHomePage()),
     );

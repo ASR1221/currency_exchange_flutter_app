@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../constants/colors.dart' as colors;
 import '../models/crypto_model.dart';
 import "../widgets/background_gradient_wrapper.dart";
 import "../widgets/list_item.dart";

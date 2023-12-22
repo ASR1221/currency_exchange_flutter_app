@@ -75,7 +75,7 @@ class _ImportWalletPageState extends State<ImportWalletPage> {
                       isError = true;
                     });
                   },
-                ), // TODO: style textfield
+                ),
 
                 if (isError) const Text("Error: not a seed phrase", style: TextStyle(color: Colors.red),),
 
@@ -83,7 +83,7 @@ class _ImportWalletPageState extends State<ImportWalletPage> {
 
                 GestureDetector(
                   onTap: () {
-                    // TODO: Import wallet
+                    _asyncMethod();
                   },
                   child: Container(
                     width: double.infinity,

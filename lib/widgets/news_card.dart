@@ -19,7 +19,7 @@ class _NewsCardState extends State<NewsCard> {
   if (originalText.length <= 55) {
     return originalText;
   } else {
-    return originalText.substring(0, 55) + '...';
+    return '${originalText.substring(0, 55)}...';
   }
 }
 

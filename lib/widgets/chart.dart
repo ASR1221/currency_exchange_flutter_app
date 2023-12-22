@@ -53,7 +53,7 @@ class _CustomChartState extends State<CustomChart> {
       padding: const EdgeInsets.all(10),
       width: double.infinity,
       height: 260,
-      child: widget.data == null ? Text("Loading") : LineChart(
+      child: widget.data == null ? const Text("Loading") : LineChart(
         LineChartData(
           gridData: const FlGridData(show: false),
           titlesData: FlTitlesData(

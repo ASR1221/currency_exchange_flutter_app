@@ -22,6 +22,10 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   @override
   void initState() {
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      _asyncMethod();
+    });
   }
 
   _asyncMethod() async {

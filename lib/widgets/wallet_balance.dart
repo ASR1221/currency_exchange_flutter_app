@@ -74,8 +74,8 @@ class _WalletBalanceState extends State<WalletBalance> {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => WalletPage()));
-            }, // TODO: navigate to wallet page
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const WalletPage()));
+            },
             child: Container(
               width: 60,
               height: 60,

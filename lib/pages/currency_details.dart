@@ -205,7 +205,7 @@ class _CurrencyDetailsPageState extends State<CurrencyDetailsPage> {
 }
 
 class TimeAmountButton extends StatelessWidget {
-  TimeAmountButton({
+  const TimeAmountButton({
     super.key,
     required this.timeText,
     required this.selected,
@@ -227,7 +227,7 @@ class TimeAmountButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: Theme.of(context).extension<CustomThemeExtension>()?.borderColor ?? Colors.black),
         ),
-        child: Text(timeText, style: TextStyle(color: selected == timeText ? colors.darkThemeTextColor : null /* Theme.of(context).textTheme.bodyMedium?.color */),),
+        child: Text(timeText, style: TextStyle(color: selected == timeText ? colors.darkThemeTextColor : null),),
       ),
     );
   }
