@@ -82,7 +82,7 @@ class _StarredPageState extends State<StarredPage> {
       child: MediaQuery.removePadding(
         context: context,
         removeTop: true,
-        child: widget.starredCurrencies == null ? walletSection(isNull: true) :
+        child: widget.starredCurrencies == null || widget.starredCurrencies.isEmpty ? walletSection(isNull: true) :
           isLoading ? walletSection(isLoading: true):
             ListView.builder(
               itemCount: widget.starredCurrencies.length,

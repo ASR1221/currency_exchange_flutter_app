@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:provider/provider.dart';
 
 import '../../app.dart';
 import '../../utils/wallet.dart';
-import '../../provider/provider_controller.dart';
 import './send_transaction_page.dart';
 import './receive_transaction.dart';
 import '../../widgets/background_gradient_wrapper.dart';
@@ -43,9 +41,7 @@ class _WalletPageState extends State<WalletPage> {
 
     if (prefs.getString("publicKey") == null || prefs.getString("publicKey")!.isEmpty) {
       if (context.mounted) {
-        final provider = Provider.of<ProviderController>(context, listen: true);
-
-        Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(provider: provider,)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
       }
     }
 
@@ -151,9 +147,7 @@ class _WalletPageState extends State<WalletPage> {
                 Center(
                   child: GestureDetector(
                     onTap: () {
-                      final provider = Provider.of<ProviderController>(context, listen: false);
-
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(provider: provider,)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
                     },
                     child: Column(
                       children: [
@@ -185,9 +179,7 @@ class _WalletPageState extends State<WalletPage> {
                       prefs.remove("privateKey");
 
                       if (context.mounted) {
-                        final provider = Provider.of<ProviderController>(context, listen: false);
-
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(provider: provider,)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
                       }
                     },
                     child: Column(

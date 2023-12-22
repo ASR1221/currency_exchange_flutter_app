@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart';
 
 import '../../app.dart';
-import '../../provider/provider_controller.dart';
 import '../../utils/wallet.dart';
 import '../../widgets/background_gradient_wrapper.dart';
 import '../../widgets/small_top_bar.dart';
@@ -44,9 +42,7 @@ class _SendTransactionPageState extends State<SendTransactionPage> {
 
     if (prefs.getString("publicKey") == null || prefs.getString("publicKey")!.isEmpty) {
       if (context.mounted) {
-        final provider = Provider.of<ProviderController>(context, listen: false);
-
-        Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(provider: provider,)));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
       }
     }
   }

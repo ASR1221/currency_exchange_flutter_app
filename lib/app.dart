@@ -88,22 +88,21 @@ class MyApp extends StatelessWidget {
         theme: lightTheme(context),
         darkTheme: darkTheme(context),
         themeMode: themeMode(provider),
-        home: provider.isFirstEnter ? WelcomePage(provider: provider) : MyHomePage(provider: provider,),
+        home: MyHomePage(),
       ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({super.key, required this.provider});
-
-  ProviderController provider;
+  MyHomePage({super.key,});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  
   double _height = 90;
   bool _isOpen = false;
 
@@ -154,6 +153,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    ProviderController provider = Provider.of<ProviderController>(context, listen: false);;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBodyBehindAppBar: true,
@@ -177,8 +179,8 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           },
           children: <Widget>[
-            StarredPage(baseCurrency: widget.provider.baseCurrency, starredCurrencies: widget.provider.starredCurrencies,),
-            CurrenciesPage(baseCurrency: widget.provider.baseCurrency,),
+            StarredPage(baseCurrency: provider.baseCurrency, starredCurrencies: provider.starredCurrencies,),
+            CurrenciesPage(baseCurrency: provider.baseCurrency,),
             const Placeholder(),
             const NewsPage(),
           ]
