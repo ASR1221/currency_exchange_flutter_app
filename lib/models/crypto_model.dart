@@ -4,10 +4,11 @@ import "package:http/http.dart" as http;
 import 'package:intl/intl.dart';
 
 import '../constants/currencies.dart';
+import '../constants/crypto.dart' as crypto;
 
 class CryptoModel {
 
-  static const _baseURL = "https://rest.coinapi.io/v1/APIKEY-7C5C387C-F807-4AB5-BCC3-C5078CB61BAE";
+  static final _baseURL = crypto.url;
 
   Future<dynamic> getCurrenciesBased({required String baseFiat, List<String> cryptoList = allCryptos}) async {
 

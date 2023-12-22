@@ -1,10 +1,11 @@
 import "dart:convert";
 
 import "package:http/http.dart" as http;
+import '../constants/news.dart' as news;
 
 class NewsModel {
 
-  static const _url = "https://www.newsapi.ai/api/v1/article/getArticles?conceptUri=http://en.wikipedia.org/wiki/Cryptocurrency&dataType=news&resultType=articles&articlesSortBy=date&lang=eng&apiKey=9f3fa104-1c4e-4670-8e26-a41b855213ec";
+  static final _url = news.url;
 
   Future<dynamic> getNews() async {
 

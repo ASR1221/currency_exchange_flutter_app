@@ -43,5 +43,6 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-/placeholder
 /lib/constants/wallet.dart
+/lib/constants/news.dart
+/lib/constants/crypto.dart
