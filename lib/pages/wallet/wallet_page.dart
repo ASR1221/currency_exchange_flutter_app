@@ -179,7 +179,7 @@ class _WalletPageState extends State<WalletPage> {
                       prefs.remove("privateKey");
 
                       if (context.mounted) {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => MyHomePage(),), (route) => false,);
                       }
                     },
                     child: Column(
