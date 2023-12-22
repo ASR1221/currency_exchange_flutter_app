@@ -39,15 +39,11 @@ class _WalletBalanceState extends State<WalletBalance> {
 
     final balance = await service.getBalance(publicKey!);
 
-    print(balance);
     if (!mounted) return;
     setState(() {
       walletBalance = hexStringToDouble(balance['result']).toString();
       isLoading = false;
     });
-
-    print(walletBalance);
-    print(isLoading);
 
   }
 
