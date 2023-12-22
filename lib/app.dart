@@ -154,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
-    ProviderController provider = Provider.of<ProviderController>(context, listen: false);;
+    ProviderController provider = Provider.of<ProviderController>(context, listen: false);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
