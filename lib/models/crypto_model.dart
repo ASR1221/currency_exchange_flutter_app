@@ -12,7 +12,6 @@ class CryptoModel {
   Future<dynamic> getCurrenciesBased({required String baseFiat, List<String> cryptoList = allCryptos}) async {
 
     http.Response response = await http.get(Uri.parse("$_baseURL/exchangerate/$baseFiat"));
-      print(response.body);
 
     if (response.statusCode != 200) {
       return null;

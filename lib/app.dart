@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import "package:flutter/services.dart";
 import 'package:provider/provider.dart';
 
+import './pages/news_page.dart';
 import './pages/welcome_page.dart';
 import './pages/converter_page.dart';
 import "./pages/currencies_page.dart";
@@ -179,6 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
             StarredPage(baseCurrency: widget.provider.baseCurrency, starredCurrencies: widget.provider.starredCurrencies,),
             CurrenciesPage(baseCurrency: widget.provider.baseCurrency,),
             const Placeholder(),
+            const NewsPage(),
           ]
         ),
       ),

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/small_top_bar.dart';
 import '../widgets/background_gradient_wrapper.dart';
 import '../constants/colors.dart' as colors;
 
 class NewsDetailsPage extends StatefulWidget {
-  const NewsDetailsPage({super.key});
+  const NewsDetailsPage({super.key, required this.news});
+
+  final dynamic news;
 
   @override
   State<NewsDetailsPage> createState() => _NewsDetailsPageState();
@@ -24,12 +27,12 @@ class _NewsDetailsPageState extends State<NewsDetailsPage> {
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(90),
+        preferredSize: const Size.fromHeight(90),
         child: SmallTopBar(changePage: changePage,),
       ),
       body: BackGroundGradientWrapper(
         childApp: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: ListView(
             children: [
               Container(
@@ -40,16 +43,27 @@ class _NewsDetailsPageState extends State<NewsDetailsPage> {
                   borderRadius: BorderRadius.circular(15),
                   gradient: colors.loadingPlaceholderGradient,
                 ),
-                // child: Image.network(""),
+                child: widget.news['image'] == null ? null : Image.network(widget.news['image']!, fit: BoxFit.cover,),
               ),
 
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
 
-              Text("Title", style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700),),
+              Text(widget.news['title'] ?? "", style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w700),),
 
-              SizedBox(height: 15,),
+              const SizedBox(height: 5,),
 
-              Text("This is the body of the new where all the news are going to be displayed. It is goin to look amaizing.\n\nSo what is the latest new so we can tell you every thing.", style: TextStyle(fontSize: 16),),
+              Text(widget.news['date'] ?? "", style: const TextStyle(fontSize: 12),),
+
+              const SizedBox(height: 15,),
+
+              Text(widget.news['body'] ?? "", style: const TextStyle(fontSize: 16),),
+
+              const SizedBox(height: 25,),
+
+              GestureDetector(
+                onTap: () => launchUrl(Uri.parse(widget.news['url'])),
+                child: Text('source: ${widget.news["url"]}', style: TextStyle(color: Colors.red[200]),),
+              ),
             ],
           ),
         ),
